@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Details</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            color: #2c3e50;
+        }
+
+        .info {
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .back-button:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Website Info: {{ domain }}</h1>
+        </header>
+        <div class="info">
+            {% if info.error %}
+                <div class="info-item">
+                    <strong>Error:</strong> {{ info.error }}
+                </div>
+            {% else %}
+                <div class="info-item"><strong>Domain Name:</strong> {{ info.domain_name }}</div>
+                <div class="info-item"><strong>Registrar:</strong> {{ info.registrar }}</div>
+                <div class="info-item"><strong>WHOIS Server:</strong> {{ info.whois_server }}</div>
+                <div class="info-item"><strong>Updated Date:</strong> {{ info.updated_date }}</div>
+                <div class="info-item"><strong>Creation Date:</strong> {{ info.creation_date }}</div>
+                <div class="info-item"><strong>Expiration Date:</strong> {{ info.expiration_date }}</div>
+                <div class="info-item"><strong>Name Servers:</strong> {{ info.name_servers|join:", " }}</div>
+                <div class="info-item"><strong>Status:</strong> {{ info.status|join:", " }}</div>
+                <div class="info-item"><strong>DNSSEC:</strong> {{ info.dnssec }}</div>
+                <div class="info-item"><strong>Emails:</strong> {{ info.emails|default:"N/A" }}</div>
+                <div class="info-item"><strong>Address:</strong> {{ info.address|default:"N/A" }}</div>
+                <div class="info-item"><strong>City:</strong> {{ info.city|default:"N/A" }}</div>
+                <div class="info-item"><strong>State:</strong> {{ info.state|default:"N/A" }}</div>
+                <div class="info-item"><strong>Postal Code:</strong> {{ info.registrant_postal_code|default:"N/A" }}</div>
+                <div class="info-item"><strong>Country:</strong> {{ info.country|default:"N/A" }}</div>
+            {% endif %}
+        </div>
+
+        <a href="{% url 'homepage' %}" class="back-button">Back to Search</a>
+    </div>
+</body>
+</html>
